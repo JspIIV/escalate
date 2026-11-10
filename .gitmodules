@@ -1,0 +1,3 @@
+[submodule "vendor/uma"]
+	path = vendor/uma
+	url = https://github.com/UMAprotocol/protocol.git

@@ -1,0 +1,55 @@
+{
+  "network": "genlayer testnet bradbury phase 2",
+  "chain_id": 4221,
+  "testusd": {
+    "address": "0xCb0d20ab00c146349b23b92a4a2E7199BeD4A68B",
+    "tx": "0x8b28988813b2d559e69a7a2f461fb9c0d62bae9cc3a005cde15c5e53eee5c7eb"
+  },
+  "compiler": "0.8.16+commit.07a7930e.Emscripten.clang",
+  "finder": {
+    "address": "0xeB53B19007FA3318C09EF22A0B5E4b3c40314ef7",
+    "tx": "0xd27636d0265fe0a5e8f77892c1e21a7e60b3d714b31453fad62ea94f9dbd371a"
+  },
+  "identifier_whitelist": {
+    "address": "0x7591523209Cd29846A5e881f036E56696133b797",
+    "tx": "0x17f64616b7d4e59c178a3aa198babc2df9024b529bc5e0f4bfa0617db7a69636"
+  },
+  "collateral_whitelist": {
+    "address": "0xCC9c414f10DB6162C6Ec160b1Dae69c024331961",
+    "tx": "0xbc2fda870a4a00ebc572b3506c769ed090c1e630c57e09caf6c8746485640ba7"
+  },
+  "store": {
+    "address": "0x3a87057e49ceC1534d1cF8E9C88bC6F1670E4Cb9",
+    "tx": "0x029d2c006316d55bdfef585d7a05b040f6b381b95b6a726634d709d5b5598dff"
+  },
+  "no_dvm": {
+    "address": "0x3fD45464669df7D8FAD0C5c852b6b011B2D03632",
+    "tx": "0x452936a26fd1ddd5efba4cb1aca6a9dfc8b7d75c1a18aefd793caee5642c3de1"
+  },
+  "steps": {
+    "identifier": "0x223e0b79b5bf7875a020cbeed48c73edf78dbe5c5c51bf64e14726f4b6bf9a8e",
+    "collateral": "0x5b12418d8f9b7406d283430a97da41bca7044ca40d6c5ee9be6fbfe1b9a6e5d7",
+    "final_fee": "0xceac750516e3f3a432e45309bb3baf5e09ae254fec55ce6f3ab9646537b19ecb",
+    "finder_IdentifierWhitelist": "0x3f76812885595b0a1ecaf051fb850c8b2cff975e420b223e516d928f0d82e53d",
+    "finder_CollateralWhitelist": "0xf60960e3aeb6f6e12c901d422bca2d92be0b3da7d1b65e3d7450a0c2f51ba64c",
+    "finder_Store": "0xc2a7a07910807a9e2c227ca7feb0d89e98808c9a5db8c83277c5d118a2da21e6",
+    "finder_Oracle": "0xd4ace1e4b92f069aafed0679c66a8218f0ed298d135e342543396acd5b9e10cb",
+    "finder_OptimisticOracleV3": "0x46033bb304449802c602da2e7a7bacdc8082705ee53266fe5aabb275ac4f4aa0",
+    "court": "0xfc9bdc243c40ad48bdb161610fd9414c5b0e30ea0fecef6c6617762b284e574a"
+  },
+  "optimistic_oracle_v3": {
+    "address": "0xe2c7f71B000fdc898feE10aC13f6558F891bB4E2",
+    "tx": "0xd95c0682c25ed295867317f2833db1b7f05f47e0d7cfbe349f3d38439f559ec8"
+  },
+  "court_escalation_manager": {
+    "address": "0x46574d6f1804a4BE27cbA7bEbA55B5e8880b51C5",
+    "tx": "0x50a59989d92e001cc9b8dbf24ea815ded61897e4d069fe347353bae384fd000e"
+  },
+  "escalate": {
+    "address": "0x1A04EFFf53525738Bb6a5B01326E9BE88a20cf99",
+    "tx": "0x07e0661d704f40d574570aa0828b50b31dde0c8d162e1bd7782a34b28de51f90"
+  },
+  "address": "0x1A04EFFf53525738Bb6a5B01326E9BE88a20cf99",
+  "tx": "0x07e0661d704f40d574570aa0828b50b31dde0c8d162e1bd7782a34b28de51f90",
+  "deployed_at": "2026-11-09T20:03:23.308Z"
+}

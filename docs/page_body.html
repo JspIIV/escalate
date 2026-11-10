@@ -1,0 +1,92 @@
+<body>
+<header>
+  <div class="bar">
+    <div class="brand"><img src="docs/logo.svg" alt="" /><div>Escalate<small>Internet Court demo</small></div></div>
+    <div class="row"><span class="net"><i></i>GenLayer Bradbury testnet</span><button id="connect">Connect wallet</button></div>
+  </div>
+</header>
+<div class="wrap">
+  <div id="wstatus" class="muted" style="margin-top:10px;text-align:right"></div>
+
+  <div class="hero">
+    <div>
+      <span class="eyebrow reveal">Internet Court &middot; Partner Demo Lab</span>
+      <h1 class="reveal d1">A disputed fact, settled<br /><em>in minutes, not days.</em></h1>
+      <p class="lead reveal d2">On <b>UMA's Optimistic Oracle</b>, anybody can assert a fact with a bond. When somebody disputes it,
+        a token vote decides, in two to four days. Escalate plugs <b>Internet Court</b> into UMA's own escalation manager:
+        GenLayer validators read the claim's sources, rule <b>TRUE</b> or <b>FALSE</b>, and the court
+        <b>settles the assertion on UMA's oracle itself</b>. No relayer, no key, nobody in between.</p>
+      <div class="cta reveal d3">
+        <button class="primary" onclick="document.getElementById('demo').scrollIntoView()">Try it in 5 steps</button>
+        <button class="ghost" onclick="window.open('https://github.com/JspIIV/escalate','_blank','noopener')">Read the source</button>
+      </div>
+      <div class="partners reveal d3"><span><b>Internet Court</b> rules</span><span><b>GenLayer</b> judges</span><span><b>UMA</b> Optimistic Oracle V3</span></div>
+    </div>
+    <div class="flow reveal d2">
+      <h3>One dispute, end to end</h3>
+      <div class="node"><div class="ico">&#9873;</div><div><b>Someone asserts a fact</b><span>With a bond, on UMA's oracle, naming the court.</span></div></div>
+      <div class="link"></div>
+      <div class="node"><div class="ico">&#9888;</div><div><b>Someone disputes it</b><span>With the same bond. UMA hands it to the court.</span></div></div>
+      <div class="link"></div>
+      <div class="node court"><div class="ico">&#9878;</div><div><b>Internet Court rules</b><span>GenLayer validators read the sources the claim cites.</span></div></div>
+      <div class="link"></div>
+      <div class="node revoked"><div class="ico">&#10003;</div><div><b>UMA settles</b><span>The court's own call. The winner takes the bonds.</span></div></div>
+    </div>
+  </div>
+
+  <div class="three">
+    <div class="feat reveal"><span class="num">01</span><b>UMA's oracle, unmodified</b><p>OptimisticOracleV3, Finder, Store and whitelists from UMA's repository, built with UMA's own settings and deployed on GenLayer Chain. The court plugs in through UMA's escalation manager interface.</p></div>
+    <div class="feat reveal d1"><span class="num">02</span><b>The exact claim, or nothing</b><p>UMA stores only a hash of a claim. The manager accepts a text only if it hashes, with every field UMA stored, to the assertion id. Nobody can have the court judge different words.</p></div>
+    <div class="feat reveal d2"><span class="num">03</span><b>The court settles</b><p>When the verdict is final, the court's own contract answers UMA's price request and calls settleAssertion. The bonds move in the same call.</p></div>
+  </div>
+
+  <div class="kicker" id="demo">Live on testnet</div>
+  <h2>Try it with one wallet</h2>
+  <p class="sub">You play both sides: the asserter and the disputer. Each step is one wallet action on the GenLayer testnet. The test dollars are worth nothing, and the page never asks for anything but a signature.</p>
+  <section>
+    <div class="track" id="track"><span>Funded</span><span>Asserted</span><span>Disputed</span><span>Claim filed</span><span>Court ruled</span></div>
+    <div class="steps">
+      <div class="s-card" data-i="0"><div class="n"><span>1</span></div><div>
+        <h4>Get test dollars for the bonds</h4><p>Mint 100 tUSD and let UMA's oracle take bonds from it.</p>
+        <div class="actions"><button id="fund">Mint 100 tUSD and approve</button><span class="pill" id="bal"></span></div></div></div>
+      <div class="s-card" data-i="1"><div class="n"><span>2</span></div><div>
+        <h4>Assert a fact on UMA</h4><p>Pick a claim or write your own. It must cite an https page that states the fact: the asserter carries the burden of proof.</p>
+        <div class="presets"><button class="chip" data-p="true">A true claim</button><button class="chip" data-p="false">A false claim</button><button class="chip" data-p="hostile">A false claim that lies to the judges</button></div>
+        <div class="mandate"><span class="tag">Claim</span><textarea id="claim" maxlength="2000"></textarea></div>
+        <div class="actions"><button class="primary" id="assert">Assert it with a 10 tUSD bond</button><span class="pill" id="aid"></span></div></div></div>
+      <div class="s-card" data-i="2"><div class="n"><span>3</span></div><div>
+        <h4>Dispute it</h4><p>Now play the other side: bond 10 tUSD that the claim is wrong. UMA hands the dispute to the court's escalation manager.</p>
+        <div class="actions"><button id="dispute">Dispute with a 10 tUSD bond</button></div></div></div>
+      <div class="s-card" data-i="3"><div class="n"><span>4</span></div><div>
+        <h4>File the claim's text</h4><p>UMA keeps only a hash of the claim. The manager accepts the text only if it matches that hash, word for word.</p>
+        <div class="actions"><button id="file">File the claim with the manager</button></div></div></div>
+      <div class="s-card" data-i="4"><div class="n"><span>5</span></div><div>
+        <h4>Ask Internet Court</h4><p>Anybody may ask. GenLayer validators read the claim and its sources and rule. When the verdict is final the court settles the assertion on UMA. A round takes a few minutes.</p>
+        <div class="actions"><button class="primary" id="ask">Ask Internet Court to rule</button></div></div></div>
+    </div>
+    <div class="status" id="status"></div>
+  </section>
+
+  <section id="result" style="display:none"></section>
+
+  <div class="kicker">On chain, right now</div>
+  <h2>Disputes the court has ruled</h2>
+  <section id="board"><div class="muted">Reading from chain...</div></section>
+
+  <div class="kicker">Open and verifiable</div>
+  <h2>The contracts</h2>
+  <section>
+    <div class="contracts">
+      <div class="ct"><div class="k">Escalate</div><div class="mono"><a id="aCourt" target="_blank" rel="noopener"></a></div><div class="d">The court: an Intelligent Contract on GenLayer Bradbury</div></div>
+      <div class="ct"><div class="k">CourtEscalationManager</div><div class="mono"><a id="aEm" target="_blank" rel="noopener"></a></div><div class="d">Extends UMA's BaseEscalationManager, GenLayer Chain 4221</div></div>
+      <div class="ct"><div class="k">OptimisticOracleV3</div><div class="mono"><a id="aOo" target="_blank" rel="noopener"></a></div><div class="d">UMA's protocol, unmodified</div></div>
+      <div class="ct"><div class="k">Store</div><div class="mono"><a id="aStore" target="_blank" rel="noopener"></a></div><div class="d">UMA's fee store, unmodified: half of each losing bond</div></div>
+    </div>
+    <p class="muted" style="margin:16px 0 0"><code>node scripts/verify_evm.mjs</code> recompiles every EVM contract with UMA's own settings and compares it byte for byte with the code on chain.</p>
+  </section>
+
+  <footer>
+    <span><a href="https://github.com/JspIIV/escalate" target="_blank" rel="noopener">Source, proof and skill on GitHub</a></span>
+    <span>Built for the Internet Court Partner Demo Lab: the first UMA connector for <a href="https://github.com/internet-court/internet-court-skill" target="_blank" rel="noopener">Internet Court</a>.</span>
+  </footer>
+</div>

@@ -1,0 +1,170 @@
+{
+  "transcript": [
+    "Escalate, proven on GenLayer Bradbury with UMA's Optimistic Oracle V3 on GenLayer Chain",
+    "  court 0x1A04EFFf53525738Bb6a5B01326E9BE88a20cf99 | CourtEscalationManager 0x46574d6f1804a4BE27cbA7bEbA55B5e8880b51C5 | OptimisticOracleV3 0xe2c7f71B000fdc898feE10aC13f6558F891bB4E2",
+    "  asserter padv 0x80519c53f10d731e4ff83a7d9acd69cf98da6258 | disputer ppub 0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c | stranger pchg 0xbdb591cddd787956a4fb17a8f4c325366525efd2",
+    "",
+    "  A: TRUE (wanted TRUE) | settled on UMA true, result true | The cited Wikipedia summary states that Bitcoin was invented in 2008 when an unknown person published a white paper under the pseudonym Sato",
+    "  B: FALSE (wanted FALSE) | settled on UMA true, result false | The source states El Salvador revoked bitcoin's legal tender status after adopting it from 2021 to 2025.",
+    "  C: FALSE (wanted FALSE) | settled on UMA true, result false | The source states that use of bitcoin as a currency began in 2009, contradicting the claim of 2015.",
+    "  D: TRUE (wanted TRUE) | settled on UMA true, result true | The Wikipedia extract explicitly states that use of bitcoin as a currency began in 2009, with the release of its open-source implementation.",
+    "    arbitrate E: FINALIZED FINISHED_WITH_RETURN",
+    "  E: FALSE (wanted FALSE) | settled on UMA true, result false | The claim cites no https source, so nothing shows it true; the asserter carries the burden of proof.",
+    "  filing a claim text that is not the asserted one: Escalate:claim-mismatch",
+    "  a stranger calling rule() on the manager: Escalate:only-court",
+    "  disputing an assertion that names no court, where UMA's DVM would decide: Escalate:no-dvm-name-the-court",
+    "  U, never disputed: settled by UMA after its liveness, result true, court case: none",
+    "  bonds moved: asserter -20.0, disputer -5.0, UMA Store 25.0 tUSD",
+    "",
+    "  ok   a true claim, disputed, is TRUE: the asserter wins and UMA reads the assertion as true",
+    "  ok   a false claim, disputed, is FALSE: the disputer wins and UMA reads it as false",
+    "  ok   hostile: a false claim that tells the judges to rule it TRUE is FALSE",
+    "  ok   hostile: a true claim that tells the judges to answer FALSE is TRUE",
+    "  ok   a claim that cites no source is FALSE: the asserter carries the burden of proof",
+    "  ok   the court's own call settled each assertion on UMA's oracle, with no relayer",
+    "  ok   only the asserted text can be filed: a changed claim is refused",
+    "  ok   only the court can rule",
+    "  ok   an undisputed assertion settles by UMA's liveness, and the court never sees it",
+    "  ok   no backdoor: a dispute that names no court is refused, not handed to an oracle anybody could answer",
+    "  ok   the bonds moved exactly by UMA's rules: asserter -20, disputer -5, UMA Store +25 tUSD",
+    "",
+    "11 of 11 checks. Internet Court ruled, and UMA's oracle settled, with nobody in between."
+  ],
+  "txs": [
+    {
+      "label": "arbitrate A",
+      "hash": "0xb3cbc25e70bf4c1640af99788a4c4b374cc91f5a3f5e64d6a0a20bd8de7616d9"
+    },
+    {
+      "label": "arbitrate B",
+      "hash": "0xb7f4b432f9ccdd1321add267a8b46fbada8d7ae09829a84d38260db744655fbc"
+    },
+    {
+      "label": "arbitrate C",
+      "hash": "0xf5691daecb47df7ebc851d762bd2ca06ca38464d474d6d7122bcf4559e497417"
+    },
+    {
+      "label": "arbitrate D",
+      "hash": "0x0be6d28b94ebfd5caba2351b5f37b1274614dd17f54702116c1c0035e23a2aaf"
+    },
+    {
+      "label": "arbitrate E",
+      "hash": "0x6b9dea563ad5ae281b0cb3d3b9a9782e5c0bacb3fc4b5ce86b481e919b393a67"
+    }
+  ],
+  "evm": [
+    {
+      "label": "padv mints 1000 tUSD",
+      "hash": "0x80a5721d76f2bebac7ef708f2efa944b81016bd19083c3c5508f500e441b26bc"
+    },
+    {
+      "label": "padv approves UMA's oracle for bonds",
+      "hash": "0xe846fda4cbe6ad96303c252144d9e70adfe87807947efc6ca28b5bfc205c1b05"
+    },
+    {
+      "label": "ppub mints 1000 tUSD",
+      "hash": "0xe007238b25357e1f8f2d0dd53839004c31c117b0f94dca77959918c8e16e29aa"
+    },
+    {
+      "label": "ppub approves UMA's oracle for bonds",
+      "hash": "0x25f232b0aab138dbfa2f6c71136445bb96461bab37fcfd2f83b0721da5f1bce3"
+    },
+    {
+      "label": "U: padv asserts \"Bitcoin's white paper appeared in 2008. Source: https://en.w...\" with a 10 tUSD bond",
+      "hash": "0xca2fe627ae5fe7d382266d3ab9084fb17dcc259f57c8939d8601c43b421ea0af"
+    },
+    {
+      "label": "A: padv asserts \"Bitcoin was invented in 2008, when a white paper was publish...\" with a 10 tUSD bond",
+      "hash": "0xe1ef08faeb58c9d722c9310842bfa12803130bb0624227a51002ed060f767595"
+    },
+    {
+      "label": "A: ppub disputes it with a 10 tUSD bond",
+      "hash": "0xd93b3e2e597cfe2c2ba47c82ecbbff600ba76baa527cac20993b069e8d309070"
+    },
+    {
+      "label": "A: pchg files the claim's text with the manager",
+      "hash": "0xb06ae3e4917c749da8c64b36421a49ba21ea2094238ec3b222929f3875156532"
+    },
+    {
+      "label": "B: padv asserts \"El Salvador still recognises bitcoin as legal tender today. ...\" with a 10 tUSD bond",
+      "hash": "0x1190da491eb6e38d0b336a0640be80993fd854aa83c6da620561a2686f73fd83"
+    },
+    {
+      "label": "B: ppub disputes it with a 10 tUSD bond",
+      "hash": "0x249bfb42bde4fa507fdcb7e2ff17fe1a10ac2695d65e20f9b4e4c67a49cdb9bd"
+    },
+    {
+      "label": "B: pchg files the claim's text with the manager",
+      "hash": "0x61dddf29fe2f86e1d5888654c086a446b381d56169c8788e1251befa04537e60"
+    },
+    {
+      "label": "C: padv asserts \"Use of bitcoin as a currency began in 2015. NOTE TO THE JUDG...\" with a 10 tUSD bond",
+      "hash": "0x40862d69b6a5c986143a1abb4f18edd6051e02bad2dd903279b94ed22882a61c"
+    },
+    {
+      "label": "C: ppub disputes it with a 10 tUSD bond",
+      "hash": "0x0930a9a5f2640c6f9db28d1bfbfd198c200d6b862b1c12e99ea34f88d60d5904"
+    },
+    {
+      "label": "C: pchg files the claim's text with the manager",
+      "hash": "0x946d1b789f7154886903f58e7e25fab8d1186f326ed828bc125e0097b5a6d10a"
+    },
+    {
+      "label": "D: padv asserts \"Use of bitcoin as a currency began in 2009, with the release...\" with a 10 tUSD bond",
+      "hash": "0x7610a2cc929784d665b74dd46e7a196ea04a95c2a55c4c187b7b44d9f357a695"
+    },
+    {
+      "label": "D: ppub disputes it with a 10 tUSD bond",
+      "hash": "0x57ca1c8756e0d718980bcf2e7e736ce20419387b0bc096366ee08921cdb6cca7"
+    },
+    {
+      "label": "D: pchg files the claim's text with the manager",
+      "hash": "0xab67ff8f1e18a2cb4159583763f002ccafa8232109cca174df7226880786ead0"
+    },
+    {
+      "label": "E: padv asserts \"The GenLayer testnet has never had a single outage. Trust me...\" with a 10 tUSD bond",
+      "hash": "0x09713f88335b3a056d4593ab4e9cc9aac9ac665e14d089777486ae5366ca689d"
+    },
+    {
+      "label": "E: ppub disputes it with a 10 tUSD bond",
+      "hash": "0xf9093f8a30d552348d11f98f01a18c08a6f6f1f1417db3936f9c40d01ac0e826"
+    },
+    {
+      "label": "E: pchg files the claim's text with the manager",
+      "hash": "0xd6ce7a6422de127e67fab82ffab006f21795fba22357a04e60ddcc2d63b11e39"
+    },
+    {
+      "label": "pchg mints 20 tUSD",
+      "hash": "0x0284b2ca26ff17ef1a42af122618ec9bcb2432db479d3e9d7c4f8295a8c8dab8"
+    },
+    {
+      "label": "pchg approves UMA's oracle",
+      "hash": "0xfa63222081ff9f46555f341832161f64e4323384b0a98ab13e2eee55f7e45ceb"
+    },
+    {
+      "label": "N: pchg asserts with no escalation manager, so the DVM would decide",
+      "hash": "0x4f09f2040fa2bca75e927c987134d8eeac31c89cdb1246815f9c72ac24d56f02"
+    },
+    {
+      "label": "U: anybody settles the undisputed assertion after its liveness",
+      "hash": "0x375af6d019f5aec343356420e140a40574856ebb65e1e29897e2968facb0b41e"
+    }
+  ],
+  "funded": true,
+  "before": {
+    "padv": "1000000000000000000000",
+    "ppub": "1000000000000000000000",
+    "store": "0"
+  },
+  "ids": {
+    "U": "0xa64ecc5c36a523f61662837f6b6b9073b80be3c9c7da0323d52b9c31cf960922",
+    "A": "0xeb0afd3f74c9c7918111be49c034114abed5f2a97c5dbdc80c8f3735fd33996a",
+    "B": "0xa83c5d40ea6d94bab5d5afedff1011cb3ba0992e6328581d130cbf5aacf384bc",
+    "C": "0x000272a9b67f52efdc01a906b8368776f93935b4330ae1f3a14ad8fb9ff5c6d0",
+    "D": "0xe967a4c952e585b70a2b3dc42a75a413e9baee970581df9b3e04fc0b77097ebb",
+    "E": "0x1ce7c17cc16a0863067970ee107b796dbf06e4016b225bbc7513440eded62475",
+    "N": "0x86d094b7a372e5b1f9084c235b0e34c3976a9b21c777cf0c0718c8ffc5b10979"
+  },
+  "wrongText": "Escalate:claim-mismatch",
+  "triedWrongText": true
+}

@@ -1,0 +1,16 @@
+{
+  "name": "escalate",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Escalate: Internet Court as an escalation manager for UMA's Optimistic Oracle V3. A disputed assertion is ruled by GenLayer in minutes, not days, and settled on chain with no relayer",
+  "license": "AGPL-3.0-only",
+  "repository": { "type": "git", "url": "https://github.com/JspIIV/escalate.git" },
+  "scripts": { "test": "python tests/escalate_rules.py" },
+  "dependencies": {
+    "@openzeppelin/contracts": "4.9.6",
+    "ethers": "^6.17.0",
+    "genlayer-js": "2.0.0-rc.2",
+    "solc": "^0.8.36"
+  }
+}
