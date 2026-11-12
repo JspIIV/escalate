@@ -13,7 +13,8 @@ an assertion can name an **escalation manager** to arbitrate its disputes instea
 Escalate is that escalation manager, and its arbitrator is Internet Court. When an assertion that names it is disputed,
 anybody can ask the court. GenLayer validators read the claim and the sources it cites, rule TRUE or FALSE, and when the
 verdict is final **the court's own contract delivers the ruling and settles the assertion on UMA's oracle**. The bonds
-move in the same call. No relayer, no oracle key, no owner in between.
+move in the same call; if settling inside it ever fails, the ruling is already recorded and anybody can call UMA's own
+`settleAssertion` afterwards. No relayer, no oracle key, no owner in between.
 
 - **Live demo:** https://jspiiv.github.io/escalate/
 - **Skill:** [`SKILL.md`](SKILL.md), the first UMA connector for Internet Court (its README lists UMA under verification

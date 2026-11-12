@@ -1,4 +1,4 @@
-"""Builds index.html: the design system of the Overrule page, recoloured, with this page's body and script.
+"""Builds index.html: the design system of the Overrule page, with this page's body and script.
 
     python docs/build_page.py
 """
@@ -25,12 +25,9 @@ head = """<!doctype html>
 <link rel="icon" href="docs/logo.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;560;600;650&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet" />
 <style>
 """ + src + """
-  .presets{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 16px}
-  .presets .chip{padding:7px 12px;font-size:13px;border-radius:999px}
-  .stamp.good{animation:slam .5s cubic-bezier(.2,1.6,.4,1)}
 </style>
 </head>
 """
