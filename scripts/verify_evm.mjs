@@ -30,5 +30,20 @@ for (const [key, name] of TARGETS) {
   all = all && same;
   console.log(`${same ? 'MATCH    ' : 'DIFFERENT'} ${name.padEnd(24)} ${dep[key].address}  ${[...new Set(fixed)].slice(0, 2).join(', ')}`);
 }
+// UMA's own deployment of the Optimistic Oracle V3 on Base Sepolia (packages/core/networks/84532.json in vendor/uma),
+// compiled from the same vendored source: the oracle this repository runs on GenLayer Chain is UMA's code as UMA ships it.
+// UMA compiled from its own checkout, so the CBOR metadata at the end, which hashes source file paths, may differ.
+{
+  const UMA_BASE_OOV3 = '0x0F7fC5E6482f096380db6158f978167b57388deE';
+  const base = new JsonRpcProvider(process.env.BASE_RPC || 'https://base-sepolia-rpc.publicnode.com', 84532, { staticNetwork: true });
+  const c = compile('OptimisticOracleV3');
+  const live = (await base.getCode(UMA_BASE_OOV3)).slice(2).toLowerCase();
+  const filled = c.deployed.split('');
+  for (const spots of Object.values(c.refs)) for (const { start, length } of spots) for (let i = start * 2; i < (start + length) * 2; i++) filled[i] = live[i];
+  const strip = (hex) => hex.slice(0, hex.length - (parseInt(hex.slice(-4), 16) + 2) * 2);
+  const exact = filled.join('') === live, code = strip(filled.join('')) === strip(live);
+  all = all && code;
+  console.log(`${exact ? 'MATCH    ' : code ? 'MATCH*   ' : 'DIFFERENT'} ${'OptimisticOracleV3'.padEnd(24)} ${UMA_BASE_OOV3}  UMA's own deployment on Base Sepolia${!exact && code ? '; * every executable byte, only the metadata hash of file paths differs' : ''}`);
+}
 console.log(all ? 'every contract on chain is the source in this repository' : 'at least one contract differs');
 process.exit(all ? 0 : 1);

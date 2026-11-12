@@ -1,0 +1,224 @@
+{
+ "checked_at": "2026-11-12T19:29:58.452Z",
+ "manager": "0x46574d6f1804a4BE27cbA7bEbA55B5e8880b51C5",
+ "court": "0x1A04EFFf53525738Bb6a5B01326E9BE88a20cf99",
+ "results": [
+  {
+   "label": "the court named in the manager is the Escalate contract",
+   "got": "0x1a04efff53525738bb6a5b01326e9be88a20cf99",
+   "ok": true
+  },
+  {
+   "label": "a stranger calling rule() is refused",
+   "got": "Escalate:only-court",
+   "ok": true
+  },
+  {
+   "label": "the deployer calling rule() is refused",
+   "got": "Escalate:only-court",
+   "ok": true
+  },
+  {
+   "label": "UMA's oracle calling rule() is refused",
+   "got": "Escalate:only-court",
+   "ok": true
+  },
+  {
+   "label": "the court cannot rule twice: assertion A, already ruled, is refused",
+   "got": "Escalate:already-ruled",
+   "ok": true
+  },
+  {
+   "label": "the court cannot rule on an assertion nobody disputed (U)",
+   "got": "Escalate:not-disputed",
+   "ok": true
+  },
+  {
+   "label": "the court cannot rule on an assertion that does not exist",
+   "got": "Escalate:not-disputed",
+   "ok": true
+  },
+  {
+   "label": "a claim cannot be filed twice: A already holds its text",
+   "got": "Escalate:already-filed",
+   "ok": true
+  },
+  {
+   "label": "a claim cannot be filed for an assertion nobody disputed",
+   "got": "Escalate:not-disputed",
+   "ok": true
+  },
+  {
+   "label": "the text filed for A is the one UMA hashed into its id",
+   "got": "true",
+   "ok": true
+  },
+  {
+   "label": "a stranger posing as the oracle cannot open a price request",
+   "got": "Not the Optimistic Oracle V3",
+   "ok": true
+  },
+  {
+   "label": "a stranger cannot report a dispute",
+   "got": "Not the Optimistic Oracle V3",
+   "ok": true
+  },
+  {
+   "label": "a price nobody ruled on cannot be read",
+   "got": "Escalate:not-ruled",
+   "ok": true
+  },
+  {
+   "label": "policy: the manager arbitrates, never blocks an assertion, never discards UMA's result",
+   "got": "false true false",
+   "ok": true
+  },
+  {
+   "label": "setCourt again from the deployer is refused",
+   "got": "Escalate:court-set",
+   "ok": true
+  },
+  {
+   "label": "setCourt from a stranger is refused",
+   "got": "Escalate:only-deployer",
+   "ok": true
+  },
+  {
+   "label": "assertion A is settled on UMA's oracle, as the court ruled",
+   "got": "true true",
+   "ok": true
+  },
+  {
+   "label": "settling A again on UMA's oracle is refused",
+   "got": "Assertion already settled",
+   "ok": true
+  }
+ ],
+ "gas": [
+  {
+   "what": "padv mints 1000 tUSD",
+   "hash": "0x80a5721d76f2bebac7ef708f2efa944b81016bd19083c3c5508f500e441b26bc",
+   "gas": 67845
+  },
+  {
+   "what": "padv approves UMA's oracle for bonds",
+   "hash": "0xe846fda4cbe6ad96303c252144d9e70adfe87807947efc6ca28b5bfc205c1b05",
+   "gas": 46535
+  },
+  {
+   "what": "ppub mints 1000 tUSD",
+   "hash": "0xe007238b25357e1f8f2d0dd53839004c31c117b0f94dca77959918c8e16e29aa",
+   "gas": 50745
+  },
+  {
+   "what": "ppub approves UMA's oracle for bonds",
+   "hash": "0x25f232b0aab138dbfa2f6c71136445bb96461bab37fcfd2f83b0721da5f1bce3",
+   "gas": 46535
+  },
+  {
+   "what": "U: padv asserts \"Bitcoin's white paper appeared in 2008. Source: https://en.w...\" with a 10 tUSD bond",
+   "hash": "0xca2fe627ae5fe7d382266d3ab9084fb17dcc259f57c8939d8601c43b421ea0af",
+   "gas": 228996
+  },
+  {
+   "what": "A: padv asserts \"Bitcoin was invented in 2008, when a white paper was publish...\" with a 10 tUSD bond",
+   "hash": "0xe1ef08faeb58c9d722c9310842bfa12803130bb0624227a51002ed060f767595",
+   "gas": 213714
+  },
+  {
+   "what": "A: ppub disputes it with a 10 tUSD bond",
+   "hash": "0xd93b3e2e597cfe2c2ba47c82ecbbff600ba76baa527cac20993b069e8d309070",
+   "gas": 210818
+  },
+  {
+   "what": "A: pchg files the claim's text with the manager",
+   "hash": "0xb06ae3e4917c749da8c64b36421a49ba21ea2094238ec3b222929f3875156532",
+   "gas": 211252
+  },
+  {
+   "what": "B: padv asserts \"El Salvador still recognises bitcoin as legal tender today. ...\" with a 10 tUSD bond",
+   "hash": "0x1190da491eb6e38d0b336a0640be80993fd854aa83c6da620561a2686f73fd83",
+   "gas": 212152
+  },
+  {
+   "what": "B: ppub disputes it with a 10 tUSD bond",
+   "hash": "0x249bfb42bde4fa507fdcb7e2ff17fe1a10ac2695d65e20f9b4e4c67a49cdb9bd",
+   "gas": 193718
+  },
+  {
+   "what": "B: pchg files the claim's text with the manager",
+   "hash": "0x61dddf29fe2f86e1d5888654c086a446b381d56169c8788e1251befa04537e60",
+   "gas": 166110
+  },
+  {
+   "what": "C: padv asserts \"Use of bitcoin as a currency began in 2015. NOTE TO THE JUDG...\" with a 10 tUSD bond",
+   "hash": "0x40862d69b6a5c986143a1abb4f18edd6051e02bad2dd903279b94ed22882a61c",
+   "gas": 213930
+  },
+  {
+   "what": "C: ppub disputes it with a 10 tUSD bond",
+   "hash": "0x0930a9a5f2640c6f9db28d1bfbfd198c200d6b862b1c12e99ea34f88d60d5904",
+   "gas": 193706
+  },
+  {
+   "what": "C: pchg files the claim's text with the manager",
+   "hash": "0x946d1b789f7154886903f58e7e25fab8d1186f326ed828bc125e0097b5a6d10a",
+   "gas": 211456
+  },
+  {
+   "what": "D: padv asserts \"Use of bitcoin as a currency began in 2009, with the release...\" with a 10 tUSD bond",
+   "hash": "0x7610a2cc929784d665b74dd46e7a196ea04a95c2a55c4c187b7b44d9f357a695",
+   "gas": 214707
+  },
+  {
+   "what": "D: ppub disputes it with a 10 tUSD bond",
+   "hash": "0x57ca1c8756e0d718980bcf2e7e736ce20419387b0bc096366ee08921cdb6cca7",
+   "gas": 193718
+  },
+  {
+   "what": "D: pchg files the claim's text with the manager",
+   "hash": "0xab67ff8f1e18a2cb4159583763f002ccafa8232109cca174df7226880786ead0",
+   "gas": 234034
+  },
+  {
+   "what": "E: padv asserts \"The GenLayer testnet has never had a single outage. Trust me...\" with a 10 tUSD bond",
+   "hash": "0x09713f88335b3a056d4593ab4e9cc9aac9ac665e14d089777486ae5366ca689d",
+   "gas": 210310
+  },
+  {
+   "what": "E: ppub disputes it with a 10 tUSD bond",
+   "hash": "0xf9093f8a30d552348d11f98f01a18c08a6f6f1f1417db3936f9c40d01ac0e826",
+   "gas": 193718
+  },
+  {
+   "what": "E: pchg files the claim's text with the manager",
+   "hash": "0xd6ce7a6422de127e67fab82ffab006f21795fba22357a04e60ddcc2d63b11e39",
+   "gas": 120692
+  },
+  {
+   "what": "pchg mints 20 tUSD",
+   "hash": "0x0284b2ca26ff17ef1a42af122618ec9bcb2432db479d3e9d7c4f8295a8c8dab8",
+   "gas": 50745
+  },
+  {
+   "what": "pchg approves UMA's oracle",
+   "hash": "0xfa63222081ff9f46555f341832161f64e4323384b0a98ab13e2eee55f7e45ceb",
+   "gas": 46535
+  },
+  {
+   "what": "N: pchg asserts with no escalation manager, so the DVM would decide",
+   "hash": "0x4f09f2040fa2bca75e927c987134d8eeac31c89cdb1246815f9c72ac24d56f02",
+   "gas": 186144
+  },
+  {
+   "what": "U: anybody settles the undisputed assertion after its liveness",
+   "hash": "0x375af6d019f5aec343356420e140a40574856ebb65e1e29897e2968facb0b41e",
+   "gas": 66148
+  },
+  {
+   "what": "GenLayer's finalization transaction that carried the court's rule() on A, settlement on UMA included",
+   "hash": "0x59a6c5f245525df3ad9413ab6128713dfeff966bdae4fc530cdb0fbd3e0dbd63",
+   "gas": 3766748
+  }
+ ]
+}

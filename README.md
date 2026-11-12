@@ -56,6 +56,10 @@ Addresses are in [`deployment.json`](deployment.json) and [`SKILL.md`](SKILL.md)
 - **The verdict is agreed by the round, compared in code.** The reasoning kept on the record is the leading judge's words.
 - **Settlement is UMA's own.** The manager only answers UMA's price request (1e18 for true, 0 for false, as the DVM does);
   `settleAssertion` on UMA's unmodified oracle moves the bonds, with half of the losing bond to UMA's Store.
+- **A wrong ruling can be appealed before a bond moves.** Anybody may ask the court, nobody chooses the verdict, and the
+  ruling reaches the manager only when the GenLayer transaction is finalized, after its appeal window.
+- **The oracle is UMA's code as UMA ships it.** The Optimistic Oracle V3 here is compiled from UMA's repository and
+  matches UMA's own deployment on Base Sepolia in every executable byte.
 
 ## Proven on Bradbury
 
@@ -83,7 +87,9 @@ All 11 checks pass.
 
 `node scripts/verify.mjs` checks the court's transactions and its deployed source against `contracts/escalate.py`.
 `node scripts/verify_evm.mjs` recompiles UMA's oracle stack, NoDVM, the manager and the test dollar with UMA's settings
-and compares each byte for byte with the code on GenLayer Chain: all eight match.
+and compares each byte for byte with the code on GenLayer Chain: all eight match. It also finds UMA's own deployment of
+the Optimistic Oracle V3 on Base Sepolia, [`0x0F7fC5E6...8deE`](https://base-sepolia.blockscout.com/address/0x0F7fC5E6482f096380db6158f978167b57388deE),
+identical to the same source in every executable byte; only the metadata hash of file paths differs.
 
 ## Tests
 
@@ -91,12 +97,22 @@ and compares each byte for byte with the code on GenLayer Chain: all eight match
 covering refusals, TRUE and FALSE and what each sends, the burden of proof, unreadable sources, hostile claims and pages
 in both directions, clipping, rounds that do not settle, sources, and `resend`.
 
+`node scripts/manager_checks.mjs`: 18 checks against the **deployed** manager and UMA's oracle on GenLayer Chain, running
+every guard with `eth_call` as UMA's oracle, the court, the deployer and a stranger: who may rule, that a ruled
+assertion cannot be ruled again, that an undisputed or unknown assertion cannot be ruled, that a claim cannot be filed
+twice or for an undisputed assertion, that nobody but UMA's oracle can open a case, the policy, who may change the
+court, and that a settled assertion cannot be settled again. It also reads the gas of the proof's own transactions.
+
+[`SECURITY.md`](SECURITY.md) maps every trust surface to the line that enforces it and the check that proves it, and
+[`docs/API.md`](docs/API.md) lists every method, argument and revert string.
+
 ## Reproduce
 
 ```bash
 npm install
 git submodule update --init      # UMA's protocol repository, pinned
 python tests/escalate_rules.py
+node scripts/manager_checks.mjs
 node scripts/verify.mjs && node scripts/verify_evm.mjs
 ```
 
