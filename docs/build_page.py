@@ -1,4 +1,4 @@
-"""Builds index.html: the design system of the Overrule page, with this page's body and script.
+"""Builds index.html: a light ledger design of its own, with this page's body and script.
 
     python docs/build_page.py
 """
@@ -25,7 +25,7 @@ head = """<!doctype html>
 <link rel="icon" href="docs/logo.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;560;600;650&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&display=swap" rel="stylesheet" />
 <style>
 """ + src + """
 </style>

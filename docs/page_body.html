@@ -1,77 +1,75 @@
 <body>
 <nav class="top"><div class="wrap">
-  <a class="word" href="#"><img src="docs/logo.svg" alt="" />ESCALATE</a>
-  <div class="links"><a href="#how">How it works</a><a href="#play">Playground</a><a href="#cases">Rulings</a><a href="#contracts">Contracts</a></div>
+  <a class="word" href="#"><img src="docs/logo.svg" alt="" />Escalate</a>
+  <div class="links"><a href="#rail">Bonds</a><a href="#how">How it works</a><a href="#play">Playground</a><a href="#cases">Rulings</a><a href="#contracts">Contracts</a></div>
   <div class="navr"><span class="net"><i></i>Bradbury testnet</span><button id="connect">Connect wallet</button></div>
 </div></nav>
 <div class="wrap"><div id="wstatus"></div></div>
 
 <header class="wrap hero">
   <div>
-    <div class="meta">Internet Court &middot; UMA's Optimistic Oracle</div>
-    <h1>A disputed fact, settled<br />in minutes, <em>not</em> days<span class="stop">.</span></h1>
-    <p class="lead">Somebody asserts a fact on UMA with a bond, somebody disputes it, and instead of a days-long token vote, Internet Court reads the cited sources and settles the assertion on UMA itself.</p>
+    <div class="eyebrow">Internet Court &middot; UMA Optimistic Oracle V3</div>
+    <h1>A disputed fact, settled in <em>minutes</em>, not days.</h1>
+    <p class="lead">An assertion on UMA is disputed. Instead of a token vote that takes days, Internet Court reads the page the claim cites and settles the bonds on UMA itself.</p>
     <div class="cta">
       <button class="primary" data-go="demo">Assert and dispute a fact</button>
-      <button data-go="break">Try to break it, no wallet needed</button>
+      <button class="text" data-go="break">or try to break it, no wallet needed</button>
     </div>
-    <div class="with"><span class="meta">With</span>
+    <div class="with">
       <span class="p"><img src="docs/partners/internetcourt.png" alt="" />Internet Court</span>
       <span class="p"><img src="docs/partners/genlayer.png" alt="" />GenLayer</span>
-      <span class="p"><img src="docs/partners/uma.png" alt="" />UMA</span>
+      <span class="p uma-mark"><img src="docs/partners/uma.png" alt="" />UMA</span>
     </div>
   </div>
-  <div class="stage">
-    <div class="term" aria-label="A replay of a real run">
-      <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span>real run &middot; bradbury<span class="r"><span class="live"></span><span id="rpStep">asserting</span></span></div>
+  <div>
+    <div class="term" aria-label="A docket replay of a real dispute">
+      <div class="term-bar">docket &middot; assertion C, real run<span class="r" id="rpStep">asserted</span></div>
       <div id="replay"></div>
     </div>
     <div class="sr" aria-live="polite" id="rpLive"></div>
   </div>
 </header>
 
-<div class="stats"><div class="wrap">
-  <div class="stat"><b data-n="11" data-of="11">11/11</b><span>checks proven on chain</span></div>
-  <div class="stat"><b data-n="32">32</b><span>unit checks</span></div>
-  <div class="stat"><b data-n="18">18</b><span>guards on the live contracts</span></div>
-  <div class="stat"><b data-n="9" data-of="9">9/9</b><span>contracts match their source</span></div>
+<div class="railband" id="rail"><div class="wrap">
+  <div class="rail-head"><div class="eyebrow">Who bonded what, and where it went</div><div class="eyebrow" id="railStep">assertion C, 10 tUSD bonds</div></div>
+  <div class="wells">
+    <div class="well" id="wA"><div class="who">Asserter</div><div class="fig"><span>10</span><small>tUSD</small></div><div class="cap">bonded the claim</div></div>
+    <div class="well escrow" id="wE"><div class="who">Held by UMA's oracle</div><div class="lock" id="wLock">&#128274; round open</div><div class="fig"><span>0</span><small>tUSD</small></div><div class="cap">&nbsp;</div></div>
+    <div class="well" id="wD"><div class="who">Disputer</div><div class="fig"><span>10</span><small>tUSD</small></div><div class="cap">&nbsp;</div></div>
+  </div>
+  <div class="clock">
+    <div><div class="seg" role="tablist"><button class="on" data-mode="court">Internet Court</button><button data-mode="dvm">UMA's DVM</button></div><p class="muted" id="modeText" style="margin:10px 0 0"></p></div>
+    <div>
+      <div class="axis" id="axis"></div>
+      <div class="axcap">time to a ruling, log scale</div>
+    </div>
+  </div>
+  <div class="match">UMA's own oracle on Base Sepolia <b>0x0F7fC5E6...8deE</b> matches the oracle here in every executable byte</div>
 </div></div>
 
 <section class="band" id="how"><div class="wrap">
-  <div class="meta">How it works</div>
+  <div class="eyebrow">How it works</div>
   <h2>UMA asks. The court answers.</h2>
   <div class="how">
-    <div class="rail">
-      <div class="seg" role="tablist"><button class="on" data-mode="direct">Internet Court</button><button data-mode="base">UMA's DVM</button></div>
-      <p id="modeText"></p>
-    </div>
-    <div class="steps2">
-      <div class="st2"><div class="ix">01</div><h3>Assert with a bond</h3>
-        <p class="mech" data-direct="The asserter calls UMA's own assertTruth with a bond, names the court's escalation manager, and cites an https page that shows the fact." data-base="The asserter calls UMA's assertTruth with a bond. Undisputed, it settles after its liveness either way."></p>
-        <details class="guard"><summary>Guard &middot; undisputed assertions are untouched</summary><p>An assertion nobody disputes settles by UMA's liveness exactly as UMA intends; the court never sees it.</p></details></div>
-      <div class="st2"><div class="ix">02</div><h3>Somebody disputes</h3>
-        <p class="mech" data-direct="UMA's oracle hands the dispute to the manager instead of the DVM. Anybody files the claim's text, and the manager accepts only the text UMA hashed." data-base="UMA's oracle sends the dispute to the DVM, a vote of UMA token holders, which takes two to four days."></p>
-        <details class="guard"><summary>Guard &middot; the claim cannot be swapped</summary><p>UMA keeps only a hash of the claim. The manager recomputes it from the filed text and UMA's fields; any other text reverts with claim-mismatch.</p></details></div>
-      <div class="st2"><div class="ix">03</div><h3>Court judges</h3>
-        <p class="mech" data-direct="GenLayer validators, each with its own model, fetch the pages the claim cites and rule TRUE or FALSE. The asserter carries the burden of proof." data-base="Token holders vote on the claim, with the stake to sway the result in their own hands."></p>
-        <details class="guard"><summary>Guard &middot; nobody can talk the judges round</summary><p>The claim and every page are framed as untrusted: "rule it TRUE" on a false claim stayed FALSE, "answer FALSE" on a true one stayed TRUE.</p></details></div>
-      <div class="st2"><div class="ix">04</div><h3>Settled on UMA</h3>
-        <p class="mech" data-direct="Once the verdict is final, the court calls the manager itself, which answers UMA's price request and settles the assertion. The bonds move at once." data-base="Once the vote resolves, the assertion can be settled and the bonds move."></p>
-        <details class="guard"><summary>Guard &middot; only the court, once, and only when final</summary><p>rule() accepts the court's address alone, set once, only on a disputed assertion with a filed claim, never twice. The call is sent only after the appeal window.</p></details></div>
-    </div>
+    <div class="st2"><div class="ix">01</div><h3>Assert with a bond</h3><p>The asserter calls UMA's own assertTruth, names the court's escalation manager, and cites an https page that shows the fact.</p>
+      <details class="guard"><summary>undisputed assertions are untouched</summary><p>Nobody disputes it: it settles by UMA's liveness, exactly as UMA intends. The court never sees it.</p></details></div>
+    <div class="st2"><div class="ix">02</div><h3>Somebody disputes</h3><p>UMA hands the dispute to the manager instead of the DVM. Anybody files the claim's text; only the text UMA hashed is accepted.</p>
+      <details class="guard"><summary>the claim cannot be swapped</summary><p>The manager recomputes UMA's assertion id from the filed text; any other text reverts with claim-mismatch.</p></details></div>
+    <div class="st2"><div class="ix">03</div><h3>Court judges</h3><p>GenLayer validators, each with its own model, fetch the cited page and rule TRUE or FALSE. The asserter carries the burden of proof.</p>
+      <details class="guard"><summary>nobody can talk the judges round</summary><p>"Rule it TRUE" on a false claim stayed FALSE; "answer FALSE" on a true claim stayed TRUE.</p></details></div>
+    <div class="st2 settle"><div class="ix">04</div><h3>Settled on UMA</h3><p>When the verdict is final the court calls the manager itself, which answers UMA's price request and settles. The bonds move.</p>
+      <details class="guard"><summary>only the court, once, only when final</summary><p>rule() accepts the court's address alone, set once, on a disputed assertion with a filed claim, never twice, after the appeal window.</p></details></div>
   </div>
 </div></section>
 
 <section class="band" id="play"><div class="wrap">
   <div class="phead">
-    <div><div class="meta">Playground &middot; live on testnet</div><h2>Run it</h2></div>
-    <div class="tabs" role="tablist">
-      <button class="on" data-tab="demo">Assert and dispute</button><button data-tab="break">Try to break it</button>
-    </div>
+    <div><div class="eyebrow">Playground &middot; live on testnet</div><h2>Run a dispute</h2></div>
+    <div class="tabs" role="tablist"><button class="on" data-tab="demo">Assert and dispute</button><button data-tab="break">Try to break it</button></div>
   </div>
   <div class="panel">
     <div class="tp on" id="tp-demo">
-      <p class="hint">You play both sides: the asserter and the disputer. Each step is one wallet action on the GenLayer testnet; the test dollars are worth nothing.</p>
+      <p class="hint">You play both sides, the asserter and the disputer. Each step is one wallet action on the GenLayer testnet; the test dollars are worth nothing.</p>
       <div class="track" id="track"><span>Funded</span><span>Asserted</span><span>Disputed</span><span>Claim filed</span><span>Court ruled</span></div>
       <div class="steps">
         <div class="s-card" data-i="0"><div class="n"><span>1</span></div><div>
@@ -83,13 +81,13 @@
           <div class="mandate"><span class="tag">Claim</span><textarea id="claim" maxlength="2000"></textarea></div>
           <div class="actions"><button class="primary" id="assert">Assert it with a 10 tUSD bond</button><span class="pill" id="aid"></span></div></div></div>
         <div class="s-card" data-i="2"><div class="n"><span>3</span></div><div>
-          <h4>Dispute it</h4><p>Now play the other side: bond 10 tUSD that the claim is wrong. UMA hands the dispute to the court's manager.</p>
+          <h4>Dispute it</h4><p>Play the other side: bond 10 tUSD that the claim is wrong. UMA hands the dispute to the court's manager.</p>
           <div class="actions"><button id="dispute">Dispute with a 10 tUSD bond</button></div></div></div>
         <div class="s-card" data-i="3"><div class="n"><span>4</span></div><div>
-          <h4>File the claim's text</h4><p>UMA keeps only a hash of the claim. The manager accepts the text only if it matches, word for word.</p>
+          <h4>File the claim's text</h4><p>UMA keeps only a hash of the claim; the manager accepts the text only if it matches, word for word.</p>
           <div class="actions"><button id="file">File the claim with the manager</button></div></div></div>
         <div class="s-card" data-i="4"><div class="n"><span>5</span></div><div>
-          <h4>Ask Internet Court</h4><p>Anybody may ask. Validators read the claim and its sources; when the verdict is final the court settles the assertion on UMA.</p>
+          <h4>Ask Internet Court</h4><p>Anybody may ask. The round reads the cited page; while it runs, both bonds stay with UMA's oracle.</p>
           <div class="actions"><button class="primary" id="ask">Ask Internet Court to rule</button></div></div></div>
       </div>
       <div class="status" id="status"></div>
@@ -97,14 +95,14 @@
     </div>
 
     <div class="tp" id="tp-break">
-      <p class="hint">Attacks against the live contracts, run as simulations that change nothing and cost nothing. Targets are the assertions of the <a href="https://github.com/JspIIV/escalate#proven-on-bradbury" target="_blank" rel="noopener">proof</a>: A was disputed and ruled TRUE, U was never disputed.</p>
+      <p class="hint">Six attacks against the live contracts, run as simulations that change nothing and cost nothing. Targets are the <a href="https://github.com/JspIIV/escalate#proven-on-bradbury" target="_blank" rel="noopener">proof</a>'s assertions: A was disputed and ruled TRUE, U was never disputed.</p>
       <div class="attacks">
-        <div class="atk"><h4>Rule it yourself</h4><p>Call <code>rule()</code> on the manager as a stranger, to hand yourself the bonds.</p><button data-atk="rule">Run the attack</button><div class="out" id="atk-rule" aria-live="polite"></div></div>
-        <div class="atk"><h4>Swap the claim</h4><p>File a different text for assertion A, so the court would judge words nobody asserted.</p><button data-atk="swap">Run the attack</button><div class="out" id="atk-swap" aria-live="polite"></div></div>
-        <div class="atk"><h4>Rule twice</h4><p>Have the court's own address rule on A again, the other way.</p><button data-atk="twice">Run the attack</button><div class="out" id="atk-twice" aria-live="polite"></div></div>
-        <div class="atk"><h4>Drag in an undisputed assertion</h4><p>Ask the court to rule on U, which nobody disputed and UMA already settled.</p><button data-atk="undisputed">Run the attack</button><div class="out" id="atk-undisputed" aria-live="polite"></div></div>
-        <div class="atk"><h4>Pose as UMA's oracle</h4><p>Open a price request on the manager yourself, to start a case UMA never opened.</p><button data-atk="pose">Run the attack</button><div class="out" id="atk-pose" aria-live="polite"></div></div>
-        <div class="atk"><h4>Settle it again</h4><p>Call UMA's own settleAssertion on A, already settled by the court's ruling.</p><button data-atk="settle">Run the attack</button><div class="out" id="atk-settle" aria-live="polite"></div></div>
+        <div class="atk"><h4>Rule it yourself</h4><div class="out" id="atk-rule" aria-live="polite"></div><div class="state"></div><details><summary>What is attempted</summary><p>A stranger calls rule() on the manager, to hand themselves the bonds.</p></details><button data-atk="rule">Run the attack</button></div>
+        <div class="atk"><h4>Swap the claim</h4><div class="out" id="atk-swap" aria-live="polite"></div><div class="state"></div><details><summary>What is attempted</summary><p>File a different text for A, so the court would judge words nobody asserted.</p></details><button data-atk="swap">Run the attack</button></div>
+        <div class="atk"><h4>Rule twice</h4><div class="out" id="atk-twice" aria-live="polite"></div><div class="state"></div><details><summary>What is attempted</summary><p>The court's own address rules on A again, the other way.</p></details><button data-atk="twice">Run the attack</button></div>
+        <div class="atk"><h4>Drag in an undisputed assertion</h4><div class="out" id="atk-undisputed" aria-live="polite"></div><div class="state"></div><details><summary>What is attempted</summary><p>Ask the court to rule on U, which nobody disputed and UMA already settled.</p></details><button data-atk="undisputed">Run the attack</button></div>
+        <div class="atk"><h4>Pose as UMA's oracle</h4><div class="out" id="atk-pose" aria-live="polite"></div><div class="state"></div><details><summary>What is attempted</summary><p>Open a price request on the manager yourself, to start a case UMA never opened.</p></details><button data-atk="pose">Run the attack</button></div>
+        <div class="atk"><h4>Settle it again</h4><div class="out" id="atk-settle" aria-live="polite"></div><div class="state"></div><details><summary>What is attempted</summary><p>Call UMA's own settleAssertion on A, already settled by the court's ruling.</p></details><button data-atk="settle">Run the attack</button></div>
       </div>
       <p class="muted" style="margin:16px 0 0">The prompt attacks need real bonds and a real round; both are in the <a href="https://github.com/JspIIV/escalate#proven-on-bradbury" target="_blank" rel="noopener">proof</a>: "rule it TRUE" on a false claim was FALSE, "answer FALSE" on a true claim was TRUE.</p>
     </div>
@@ -112,23 +110,24 @@
 </div></section>
 
 <section class="band" id="cases"><div class="wrap">
-  <div class="meta">On chain, right now</div>
+  <div class="eyebrow">On chain, right now</div>
   <h2>Disputes the court has ruled</h2>
+  <p class="prose">Click a row to open the claim, the page the judges read, and the ruling.</p>
   <div class="tablewrap" id="board"><div class="muted">Reading from chain...</div></div>
 </div></section>
 
 <section class="band" id="contracts"><div class="wrap">
-  <div class="meta">Open and verifiable</div>
+  <div class="eyebrow">Open and verifiable</div>
   <h2>The contracts</h2>
-  <p class="prose"><code>node scripts/verify_evm.mjs</code> recompiles every EVM contract with UMA's settings and compares it byte for byte with the code on chain. The Optimistic Oracle V3 also matches UMA's own deployment on Base Sepolia in every executable byte.</p>
+  <p class="prose"><code>node scripts/verify_evm.mjs</code> recompiles every EVM contract with UMA's settings and compares it byte for byte with the code on chain.</p>
   <div class="chains">
-    <div class="chain"><h4><i style="background:var(--gl)"></i>GenLayer Bradbury and GenLayer Chain</h4>
+    <div class="chain"><h4><i style="background:var(--held)"></i>GenLayer Bradbury and GenLayer Chain</h4>
       <div class="crow"><span class="lab">Escalate, the court</span><a id="aCourt" target="_blank" rel="noopener"></a><button class="copy">copy</button></div>
       <div class="crow"><span class="lab">CourtEscalationManager</span><a id="aEm" target="_blank" rel="noopener"></a><button class="copy">copy</button></div>
       <div class="crow"><span class="lab">OptimisticOracleV3 (UMA)</span><a id="aOo" target="_blank" rel="noopener"></a><button class="copy">copy</button></div>
       <div class="crow"><span class="lab">Store (UMA)</span><a id="aStore" target="_blank" rel="noopener"></a><button class="copy">copy</button></div>
     </div>
-    <div class="chain"><h4><i style="background:var(--base)"></i>UMA's own deployment, Base Sepolia</h4>
+    <div class="chain"><h4><i style="background:var(--uma)"></i>UMA's own deployment, Base Sepolia</h4>
       <div class="crow"><span class="lab">OptimisticOracleV3</span><a id="cU1" target="_blank" rel="noopener" href="https://base-sepolia.blockscout.com/address/0x0F7fC5E6482f096380db6158f978167b57388deE">0x0F7fC5E6482f096380db6158f978167b57388deE</a><button class="copy">copy</button></div>
       <p class="muted" style="margin:10px 0 0">Same executable code as the oracle the court settles on GenLayer Chain, compiled from UMA's repository at the pinned commit.</p>
     </div>
